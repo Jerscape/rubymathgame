@@ -21,6 +21,7 @@ end
 #SETTER
 # player.name = "Jeeves"
 # player.player_score = 150
+# player.player_lives = 
 # player.score_incrementer
 #
 
