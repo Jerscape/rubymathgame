@@ -8,11 +8,6 @@ class Player
     @score = 0
   end
 
-  #increment score by 1
-  def score_incrementer()
-    @player_score += 1
-  end
-
 end 
 
 #GETTER
