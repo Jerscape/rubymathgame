@@ -34,8 +34,8 @@ class Game
     #maybe it;s if not while
     while player1[:instance].lives > 0 && player2[:instance].lives > 0
       #generate question
-      #use if statement and modulus to toggle
       if player_toggle % 2 == 0 && player1[:instance].lives
+        puts "|-----New Turn-------|"
         question = Question.new()
         #prompt player 1
         puts "Your turn #{player1[:instance].name}"
@@ -45,17 +45,27 @@ class Game
         if answer == question.answer
           puts "Yes, the correct answer is: #{question.answer}"
           #increase player1 live
-          player1[:instance].lives = player1[:instance].lives + 1
-          puts "Your score is: "
-          puts "Your lives are: #{player1[:instance].lives}"
+          # player1[:instance].lives = player1[:instance].lives + 1
+          player1[:instance].lives += 1
+          player1[:instance].score += 1
+
+          #output to player
+          puts "Your score is: #{player1[:instance].score}"
+          puts "You have #{player1[:instance].lives} lives left"
+
         else 
           puts "I am sorry, that is the wrong answer, the correct answer is #{question.answer}"
-          player1[:instance].lives = player1[:instance].lives - 1 
-          puts "You have #{player1[:instance].lives} lives left"
+          # player1[:instance].lives = player1[:instance].lives - 1 
+          player1[:instance].lives -= 1
+          
+          #output to player
+          puts "#{player1[:instance].name} You have #{player1[:instance].lives} lives left"
+          puts "Your score is: #{player1[:instance].score}"
         end
         @player_toggle += 1
       else 
         #prompt player 2
+        puts "|-----New Turn-------|"
         puts "Your turn #{player2[:instance].name}"
         question = Question.new()
         puts question.prompt
@@ -63,20 +73,33 @@ class Game
         if answer == question.answer
           puts "Yes, the correct answer is: #{question.answer}"
           #increase player1 live
-          player2[:instance].lives = player2[:instance].lives + 1
+          # player2[:instance].lives = player2[:instance].lives + 1
+          player2[:instance].lives += 1
+          player2[:instance].score += 1
           #increase toggle either way somewhere
-          puts "Your score is: "
-          puts "Your lives are: #{player2[:instance].lives}"
+          puts "Your score is: #{player2[:instance].score}"
+          puts "You have #{player2[:instance].lives} lives left"
         else 
           puts "I am sorry, that is the wrong answer, the correct answer is #{question.answer}"
           player2[:instance].lives = player2[:instance].lives - 1 
-          puts "You have #{player2[:instance].lives} lives left"
+          puts "#{player2[:instance].name} You have #{player2[:instance].lives} lives left"
         end
         @player_toggle += 1
       end #end first else if
 
     end
     
+    puts "That's the game!"
+    puts "Final score is #{player1[:instance].name}: #{player1[:instance].score} vs. #{player2[:instance].name}: #{player2[:instance].score}"
+    if player1[:instance].score > player2[:instance].score
+      puts "#{player1[:instance].name} wins!"
+    elsif
+      player1[:instance].score == player2[:instance].score
+      puts "It's a tie!"
+    else 
+      puts "#{player2[:instance].name} wins!"
+    end
+
   end
 
 end
